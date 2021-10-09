@@ -52,7 +52,6 @@ public class Dealer extends Player {
       c = deck.getCard();
       c.show(true);
       player.dealCard(c);
-
       return true;
     }
     return false;
@@ -89,8 +88,16 @@ public class Dealer extends Player {
    * The player has choosen to take no more cards, it is the dealers turn.
    */
   public boolean stand() {
-    //TODO: implement me
+    showHand();
+    if (deck != null) {
+      while (hitRule.doHit(this) == true) {
+        Card.Mutable c;
+        c = deck.getCard();
+        c.show(true);
+        dealCard(c);
+      }
+      return true;
+    }
     return false;
   }
-
 }
