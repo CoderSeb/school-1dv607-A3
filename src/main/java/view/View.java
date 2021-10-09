@@ -15,7 +15,7 @@ public interface View {
 
    * @return the pressed character.
    */
-  int getInput();
+  Action getInput();
 
   /**
    * Displays a card.
@@ -46,4 +46,14 @@ public interface View {
    * @param dealerIsWinner True if the dealer is the winner.
    */
   void displayGameOver(boolean dealerIsWinner);
+
+  /**
+   * Action enum.
+   */
+  enum Action {
+    NEW_GAME,
+    HIT,
+    STAND,
+    QUIT;
+  }
 }
