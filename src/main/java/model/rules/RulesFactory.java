@@ -11,7 +11,8 @@ public class RulesFactory {
    * @return The rule to use
    */
   public HitStrategy getHitRule() {
-    return new BasicHitStrategy();
+    // return new BasicHitStrategy();
+    return new Soft17HitStrategy();
   }
 
   /**
