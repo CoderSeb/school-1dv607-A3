@@ -7,11 +7,12 @@ public class Soft17HitStrategy implements HitStrategy {
   private static final int hitLimit = 17;
 
   public boolean doHit(Player dealer) {
+    int score = dealer.calcScore();
     for (Card c : dealer.getHand()) {
-      if (c.getValue() == Card.Value.Ace && dealer.calcScore() <= hitLimit) {
-       return true;
+      if (c.getValue() == Card.Value.Ace && score <= hitLimit) {
+        return true;
       }
     }
-    return dealer.calcScore() < 17;
+    return score < 17;
   }
 }

@@ -16,12 +16,10 @@ public class GameTests {
     Card.Mutable ace = new Card.Mutable(Card.Color.Spades, Card.Value.Ace);
     Card.Mutable two = new Card.Mutable(Card.Color.Spades, Card.Value.Two);
     Card.Mutable four = new Card.Mutable(Card.Color.Spades, Card.Value.Four);
-    ace.show(true);
-    two.show(true);
-    four.show(true);
     d.dealCard(ace);
     d.dealCard(two);
     d.dealCard(four);
+    d.showHand();
   }
 
   @Test
@@ -36,15 +34,28 @@ public class GameTests {
   @DisplayName("Dealer has 17, with a King Dealer should have 17.")
   void soft17Calc() {
     Card.Mutable king = new Card.Mutable(Card.Color.Spades, Card.Value.King);
-    king.show(true);
     d.dealCard(king);
+    d.showHand();
     assertEquals(17, d.calcScore());
   }
 
   @Test
   @Order(3)
-  @DisplayName("Dealer has hard 17, should not take one more card.")
+  @DisplayName("Dealer has hard 17, gets another Ace, score should be 18.")
+  void soft17NewCalc() {
+    Card.Mutable ace = new Card.Mutable(Card.Color.Hearts, Card.Value.Ace);
+    d.dealCard(ace);
+    d.showHand();
+    assertEquals(18, d.calcScore());
+  }
+
+  @Test
+  @Order(4)
+  @DisplayName("Dealer has 18, should not take another card.")
   void soft17FalseToHit() {
+    Card.Mutable ace = new Card.Mutable(Card.Color.Hearts, Card.Value.Ace);
+    d.dealCard(ace);
+    d.showHand();
     assertFalse(soft17Rule.doHit(d));
   }
 }
