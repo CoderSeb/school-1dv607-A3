@@ -1,6 +1,5 @@
 package model.rules;
 
-import java.util.Iterator;
 import model.Card;
 import model.Player;
 
@@ -23,10 +22,8 @@ public class Soft17HitStrategy implements HitStrategy {
     int[] cardScores = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11 };
     int score = 0;
     int firstScore = dealer.calcScore();
-    Iterator<Card> it = dealer.getHand().iterator();
 
-    while(it.hasNext()) {
-      Card c = it.next();
+    for (Card c : dealer.getHand()) {
       if (c.getValue() != Card.Value.Ace) {
         score += cardScores[c.getValue().ordinal()];
       }
