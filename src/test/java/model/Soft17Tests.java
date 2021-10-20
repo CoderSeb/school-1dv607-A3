@@ -5,7 +5,7 @@ import model.rules.Soft17HitStrategy;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameTests {
+public class Soft17Tests {
   Player d;
   HitStrategy soft17Rule;
 
@@ -41,20 +41,10 @@ public class GameTests {
 
   @Test
   @Order(3)
-  @DisplayName("Dealer has hard 17, gets another Ace, score should be 18.")
+  @DisplayName("Dealer has hard 17, should not take another card.")
   void soft17NewCalc() {
-    Card.Mutable ace = new Card.Mutable(Card.Color.Hearts, Card.Value.Ace);
-    d.dealCard(ace);
-    d.showHand();
-    assertEquals(18, d.calcScore());
-  }
-
-  @Test
-  @Order(4)
-  @DisplayName("Dealer has 18, should not take another card.")
-  void soft17FalseToHit() {
-    Card.Mutable ace = new Card.Mutable(Card.Color.Hearts, Card.Value.Ace);
-    d.dealCard(ace);
+    Card.Mutable king = new Card.Mutable(Card.Color.Spades, Card.Value.King);
+    d.dealCard(king);
     d.showHand();
     assertFalse(soft17Rule.doHit(d));
   }
