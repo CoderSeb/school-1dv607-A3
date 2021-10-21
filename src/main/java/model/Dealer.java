@@ -99,4 +99,19 @@ public class Dealer extends Player {
     }
     return false;
   }
+
+  private Card.Mutable takeCard() {
+    return deck.getCard();
+  }
+
+  public void giveHiddenCard(Player player) {
+    player.dealCard(takeCard());
+  }
+
+  public void giveOpenCard(Player player) {
+    Card.Mutable c = takeCard();
+    c.show(true);
+    player.dealCard(c);
+
+  }
 }
