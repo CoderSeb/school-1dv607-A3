@@ -1,6 +1,5 @@
 package model;
 
-import jdk.internal.module.Checks;
 import model.rules.HitStrategy;
 import model.rules.NewGameStrategy;
 import model.rules.RulesFactory;
@@ -51,10 +50,7 @@ public class Dealer extends Player {
    */
   public boolean hit(Player player) {
     if (deck != null && player.calcScore() < maxScore && !isGameOver()) {
-      Card.Mutable c;
-      c = deck.getCard();
-      c.show(true);
-      player.dealCard(c);
+      giveOpenCard(player);
       return true;
     }
     return false;
@@ -90,10 +86,7 @@ public class Dealer extends Player {
     showHand();
     if (deck != null) {
       while (hitRule.doHit(this) == true) {
-        Card.Mutable c;
-        c = deck.getCard();
-        c.show(true);
-        dealCard(c);
+        giveOpenCard(this);
       }
       return true;
     }
@@ -112,6 +105,5 @@ public class Dealer extends Player {
     Card.Mutable c = takeCard();
     c.show(true);
     player.dealCard(c);
-
   }
 }
