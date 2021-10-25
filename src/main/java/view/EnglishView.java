@@ -91,6 +91,9 @@ public class EnglishView implements View {
     System.out.println("Player draws a new card...");
   }
 
+  /**
+   * Pauses the thread for a give amount of milliseconds.
+   */
   public void pause() {
     try {
       Thread.sleep(750);

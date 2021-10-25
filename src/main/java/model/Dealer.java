@@ -19,7 +19,7 @@ public class Dealer extends Player {
 
   /**
    * Initializing constructor.
-
+   *
    * @param rulesFactory A factory that creates the rules to use.
    */
   public Dealer(RulesFactory rulesFactory) {
@@ -29,10 +29,20 @@ public class Dealer extends Player {
     subscribers = new ArrayList<CardObserver>();
   }
 
+  /**
+   * Add subscriber.
+   *
+   * @param newSubscriber the new subscriber
+   */
   public void addSubscriber(CardObserver newSubscriber) {
     subscribers.add(newSubscriber);
   }
 
+  /**
+   * Notify subscribers.
+   *
+   * @param playerString the player string
+   */
   public void notifySubscribers(String playerString) {
     for (CardObserver subscriber : subscribers) {
       subscriber.handModified(playerString);
@@ -41,7 +51,7 @@ public class Dealer extends Player {
 
   /**
    * Starts a new game if the game is not currently under way.
-
+   *
    * @param player The player to play agains.
    * @return True if the game could be started.
    */
@@ -57,7 +67,7 @@ public class Dealer extends Player {
 
   /**
    * Gives the player one more card if possible. I.e. the player hits.
-
+   *
    * @param player The player to give a card to.
    * @return true if the player could get a new card, false otherwise.
    */
@@ -72,7 +82,7 @@ public class Dealer extends Player {
 
   /**
    * Checks if the dealer is the winner compared to a player.
-
+   *
    * @param player The player to check agains.
    * @return True if the dealer is the winner, false if the player is the winner.
    */
@@ -82,7 +92,7 @@ public class Dealer extends Player {
 
   /**
    * Checks if the game is over, i.e. the dealer can take no more cards.
-
+   *
    * @return True if the game is over.
    */
   public boolean isGameOver() {
@@ -94,6 +104,8 @@ public class Dealer extends Player {
 
   /**
    * The player has choosen to take no more cards, it is the dealers turn.
+   *
+   * @return the boolean
    */
   public boolean stand() {
     showHand();
@@ -110,6 +122,11 @@ public class Dealer extends Player {
     return deck.getCard();
   }
 
+  /**
+   * Give hidden card.
+   *
+   * @param player the player
+   */
   public void giveHiddenCard(Player player) {
     player.dealCard(takeCard());
     if (player instanceof Dealer) {
@@ -119,6 +136,11 @@ public class Dealer extends Player {
     }
   }
 
+  /**
+   * Give open card.
+   *
+   * @param player the player
+   */
   public void giveOpenCard(Player player) {
     Card.Mutable c = takeCard();
     c.show(true);

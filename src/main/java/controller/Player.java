@@ -11,6 +11,12 @@ public class Player implements model.CardObserver {
   private Game model;
   private View view;
 
+  /**
+   * Instantiates a new Player.
+   *
+   * @param model the model
+   * @param view  the view
+   */
   public Player(Game model, View view) {
     this.model = model;
     this.view = view;
@@ -46,6 +52,11 @@ public class Player implements model.CardObserver {
     return input != View.Action.QUIT;
   }
 
+  /**
+   * Updates the view when a hand is modified.
+   *
+   * @param player as the String "Player" or "Dealer".
+   */
   public void handModified(String player) {
     if (player == "Player") {
       view.displayPlayerDrawn();

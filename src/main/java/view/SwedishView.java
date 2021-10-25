@@ -97,6 +97,9 @@ public class SwedishView implements View {
     System.out.println("");
   }
 
+  /**
+   * Pauses the thread for a give amount of milliseconds.
+   */
   public void pause() {
     try {
       Thread.sleep(750);
