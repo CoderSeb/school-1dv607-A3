@@ -96,4 +96,12 @@ public class SwedishView implements View {
     System.out.println("Poäng: " + score);
     System.out.println("");
   }
+
+  public void pause() {
+    try {
+      Thread.sleep(750);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+  }
 }

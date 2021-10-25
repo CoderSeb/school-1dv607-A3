@@ -56,4 +56,6 @@ public interface View {
     STAND,
     QUIT;
   }
+
+  void pause();
 }

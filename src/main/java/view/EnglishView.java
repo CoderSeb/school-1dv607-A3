@@ -83,4 +83,12 @@ public class EnglishView implements View {
     }
 
   }
+
+  public void pause() {
+    try {
+      Thread.sleep(750);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+  }
 }
