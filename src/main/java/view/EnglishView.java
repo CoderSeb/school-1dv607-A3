@@ -9,7 +9,7 @@ public class EnglishView implements View {
    * Shows a welcome message.
    */
   public void displayWelcomeMessage() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 2; i++) {
       System.out.print("\n");
     }
     System.out.println("Hello Black Jack World");
@@ -81,7 +81,14 @@ public class EnglishView implements View {
     } else {
       System.out.println("You Won!");
     }
+  }
 
+  public void displayDealerDrawn() {
+    System.out.println("Dealer draws a new card...");
+  }
+
+  public void displayPlayerDrawn() {
+    System.out.println("Player draws a new card...");
   }
 
   public void pause() {

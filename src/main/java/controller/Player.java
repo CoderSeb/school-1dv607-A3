@@ -14,6 +14,8 @@ public class Player implements model.CardObserver {
   public Player(Game model, View view) {
     this.model = model;
     this.view = view;
+
+    model.addSubscriber(this);
   }
 
   /**
@@ -44,9 +46,14 @@ public class Player implements model.CardObserver {
     return input != View.Action.QUIT;
   }
 
-  public void handModified() {
-    view.displayDealerHand(model.getDealerHand(), model.getDealerScore());
-    view.displayPlayerHand(model.getPlayerHand(), model.getPlayerScore());
-    view.pause();
+  public void handModified(String player) {
+    if (player == "Player") {
+      view.displayPlayerDrawn();
+      view.displayPlayerHand(model.getPlayerHand(), model.getPlayerScore());
+    } else {
+      view.displayDealerDrawn();
+      view.pause();
+      view.displayDealerHand(model.getDealerHand(), model.getDealerScore());
+    }
   }
 }

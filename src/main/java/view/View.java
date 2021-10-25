@@ -58,4 +58,8 @@ public interface View {
   }
 
   void pause();
+
+  void displayPlayerDrawn();
+
+  void displayDealerDrawn();
 }

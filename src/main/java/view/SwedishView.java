@@ -9,7 +9,7 @@ public class SwedishView implements View {
    * Shows a welcome message.
    */
   public void displayWelcomeMessage() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 2; i++) {
       System.out.print("\n");
     }
 
@@ -103,5 +103,13 @@ public class SwedishView implements View {
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
     }
+  }
+
+  public void displayPlayerDrawn() {
+    System.out.println("Spelaren tar ett nytt kort...");
+  }
+
+  public void displayDealerDrawn() {
+    System.out.println("Croupiern tar ett nytt kort...");
   }
 }
