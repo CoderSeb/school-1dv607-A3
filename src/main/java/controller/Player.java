@@ -7,35 +7,64 @@ import view.View;
 /**
  * Scenario controller for playing the game.
  */
-public class Player {
+public class Player implements model.CardObserver {
+  private Game model;
+  private View view;
+
+  /**
+   * Instantiates a new Player.
+   *
+   * @param model the model
+   * @param view  the view
+   */
+  public Player(Game model, View view) {
+    this.model = model;
+    this.view = view;
+
+    model.addSubscriber(this);
+  }
 
   /**
    * Runs the play use case.
-
-   * @param game The game state.
-   * @param view The view to use.
+   *
    * @return True as long as the game should continue.
    */
-  public boolean play(Game game, View view) {
+  public boolean play() {
     view.displayWelcomeMessage();
 
-    view.displayDealerHand(game.getDealerHand(), game.getDealerScore());
-    view.displayPlayerHand(game.getPlayerHand(), game.getPlayerScore());
+    view.displayDealerHand(model.getDealerHand(), model.getDealerScore());
+    view.displayPlayerHand(model.getPlayerHand(), model.getPlayerScore());
 
-    if (game.isGameOver()) {
-      view.displayGameOver(game.isDealerWinner());
+    if (model.isGameOver()) {
+      view.displayGameOver(model.isDealerWinner());
     }
 
-    int input = view.getInput();
+    View.Action input = view.getInput();
 
-    if (input == 'p') {
-      game.newGame();
-    } else if (input == 'h') {
-      game.hit();
-    } else if (input == 's') {
-      game.stand();
+    if (input == View.Action.NEW_GAME) {
+      model.newGame();
+    } else if (input == View.Action.HIT) {
+      model.hit();
+    } else if (input == View.Action.STAND) {
+      model.stand();
     }
 
-    return input != 'q';
+    return input != View.Action.QUIT;
+  }
+
+  /**
+   * Updates the view when a hand is modified.
+   *
+   * @param player as the String "Player" or "Dealer".
+   */
+  public void handModified(String player) {
+    if (player == "Player") {
+      view.displayPlayerDrawn();
+      view.displayPlayerHand(model.getPlayerHand(), model.getPlayerScore());
+    } else {
+      view.displayDealerDrawn();
+      view.pause();
+      view.displayDealerHand(model.getDealerHand(), model.getDealerScore());
+    }
   }
 }

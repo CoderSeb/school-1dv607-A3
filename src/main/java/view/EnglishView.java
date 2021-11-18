@@ -9,7 +9,7 @@ public class EnglishView implements View {
    * Shows a welcome message.
    */
   public void displayWelcomeMessage() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 2; i++) {
       System.out.print("\n");
     }
     System.out.println("Hello Black Jack World");
@@ -21,16 +21,30 @@ public class EnglishView implements View {
 
    * @return the pressed character.
    */
-  public int getInput() {
+  public Action getInput() {
     try {
       int c = System.in.read();
       while (c == '\r' || c == '\n') {
         c = System.in.read();
       }
-      return c;
+      return convertInput(c);
     } catch (java.io.IOException e) {
       System.out.println("" + e);
-      return 0;
+      return convertInput(0);
+    }
+  }
+
+  private Action convertInput(int input) {
+    System.out.println(input);
+    switch (input) {
+      case('p'):
+        return Action.NEW_GAME;
+      case('h'):
+        return Action.HIT;
+      case('s'):
+        return Action.STAND;
+      default:
+        return Action.QUIT;
     }
   }
 
@@ -67,6 +81,24 @@ public class EnglishView implements View {
     } else {
       System.out.println("You Won!");
     }
+  }
 
+  public void displayDealerDrawn() {
+    System.out.println("Dealer draws a new card...");
+  }
+
+  public void displayPlayerDrawn() {
+    System.out.println("Player draws a new card...");
+  }
+
+  /**
+   * Pauses the thread for a give amount of milliseconds.
+   */
+  public void pause() {
+    try {
+      Thread.sleep(750);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
   }
 }

@@ -9,7 +9,7 @@ public class SwedishView implements View {
    * Shows a welcome message.
    */
   public void displayWelcomeMessage() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 2; i++) {
       System.out.print("\n");
     }
 
@@ -23,16 +23,30 @@ public class SwedishView implements View {
 
    * @return the pressed character.
    */
-  public int getInput() {
+  public Action getInput() {
     try {
       int c = System.in.read();
       while (c == '\r' || c == '\n') {
         c = System.in.read();
       }
-      return c;
+      return convertInput(c);
     } catch (java.io.IOException e) {
       System.out.println("" + e);
-      return 0;
+      return convertInput(0);
+    }
+  }
+
+  private Action convertInput(int input) {
+    System.out.println(input);
+    switch (input) {
+      case('p'):
+        return Action.NEW_GAME;
+      case('h'):
+        return Action.HIT;
+      case('s'):
+        return Action.STAND;
+      default:
+        return Action.QUIT;
     }
   }
 
@@ -81,5 +95,24 @@ public class SwedishView implements View {
     }
     System.out.println("Poäng: " + score);
     System.out.println("");
+  }
+
+  /**
+   * Pauses the thread for a give amount of milliseconds.
+   */
+  public void pause() {
+    try {
+      Thread.sleep(750);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+  }
+
+  public void displayPlayerDrawn() {
+    System.out.println("Spelaren tar ett nytt kort...");
+  }
+
+  public void displayDealerDrawn() {
+    System.out.println("Croupiern tar ett nytt kort...");
   }
 }

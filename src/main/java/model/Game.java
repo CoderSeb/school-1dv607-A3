@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * Represents the entirety of the game. Acts as a Facade to the model.
  */
@@ -14,6 +15,10 @@ public class Game {
   public Game() {
     dealer = new Dealer(new model.rules.RulesFactory());
     player = new Player();
+  }
+
+  public void addSubscriber(CardObserver newSubscriber) {
+    dealer.addSubscriber(newSubscriber);
   }
 
   /**
@@ -58,8 +63,7 @@ public class Game {
    * @return True if the dealer has the initiaive.
    */
   public boolean stand() {
-    // TODO: implement me
-    return false;
+    return dealer.stand();
   }
 
   /**
